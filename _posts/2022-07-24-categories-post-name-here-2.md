@@ -1,21 +1,281 @@
 ---
-title: "[포스팅 예시] 이곳에 제목을 입력하세요"
-excerpt: "본문의 주요 내용을 여기에 입력하세요"
+title: "🧪 TestGenius"
+excerpt: "[Privit Project] 🧪 TestGenius Read.me"
 
 categories:
-  - Categories2
+  - Readme
 tags:
-  - [tag1, tag2]
+  - 
 
-permalink: /categories2/post-name-here-2/
+permalink: /readme/post-name-here-2/
 
 toc: true
 toc_sticky: true
 
-date: 2022-07-24
-last_modified_at: 2022-07-24
+date: 2025-12-31
+last_modified_at: 2025-12-31
 ---
 
 ## 🦥 본문
 
-본문은 여기에 ...
+> **AI-Powered Test Generator** - Generate pytest unit tests + JMeter performance tests with local AI
+
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Streamlit](https://img.shields.io/badge/streamlit-1.29.0-FF4B4B.svg)](https://streamlit.io)
+[![pytest](https://img.shields.io/badge/pytest-7.4.0-0A9EDC.svg)](https://pytest.org)
+[![JMeter](https://img.shields.io/badge/JMeter-5.6+-D22128.svg)](https://jmeter.apache.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+---
+
+## 📖 개요
+
+**TestGenius**는 로컬 AI(Ollama)를 사용하여 Python 코드에 대한 pytest 단위 테스트와 JMeter 성능 테스트를 자동으로 생성하고 실행하는 통합 테스팅 도구입니다.
+
+### ✨ 핵심 기능
+
+- 🤖 **이중 테스트 생성** - Pytest 단위 테스트 + JMeter 성능 테스트 동시 생성
+- ⚡ **통합 대시보드** - 테스트 결과, 커버리지, 성능 메트릭을 한눈에 확인
+- 🔒 **100% 오프라인** - API 키 불필요, 인터넷 연결 불필요
+- 📁 **다양한 입력** - 텍스트, 단일 파일, ZIP 프로젝트 지원
+- 🎯 **스마트 필터링** - AI 환각 제거, 문법 검증, 빈 테스트 거부
+- 📊 **성능 분석** - Success Rate, Response Time, Throughput 시각화
+- 📄 **PDF 리포트** - 모든 테스트 결과를 PDF로 다운로드
+- 🌐 **Flask/FastAPI 지원** - 주요 Python 웹 프레임워크 모두 지원
+- 🎨 **최적화된 UI** - 여백 조정 및 테스트 결과 계층화로 가독성 향상
+
+---
+
+## 🏗️ 프로젝트 구조
+
+```
+testgenius/
+├── app.py                    # Streamlit UI
+├── requirements.txt
+├── config/
+│   └── settings.py           # 설정 관리
+├── core/
+│   ├── ai_engine.py          # Ollama 통신
+│   ├── test_generator.py    # Pytest 생성 + 후처리
+│   ├── test_executor.py      # pytest 실행
+│   ├── jmeter_generator.py   # JMeter JMX 생성
+│   ├── jmeter_analyzer.py    # JMeter 결과 파싱
+│   └── pdf_generator.py      # PDF 리포트 생성 (NEW)
+├── ui/
+│   ├── result_dashboard.py   # Pytest 대시보드
+│   └── jmeter_dashboard.py   # JMeter 대시보드
+├── utils/
+│   └── file_handler.py       # 파일 처리
+└── tests/
+    └── unit/                 # 단위 테스트
+```
+
+---
+
+## 🚀 빠른 시작
+
+### 1. 사전 요구사항
+
+- Python 3.10 이상
+- [Ollama](https://ollama.ai) 설치
+
+### 2. 설치
+
+```bash
+# 1. 가상환경 생성
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# 2. 의존성 설치
+pip install -r requirements.txt
+
+# 3. Ollama 모델 다운로드
+ollama pull deepseek-coder:1.3b
+```
+
+### 3. 실행
+
+```bash
+# 터미널 1: Ollama 서버 시작
+ollama serve
+
+# 터미널 2: TestGenius 실행
+streamlit run app.py
+```
+
+브라우저에서 `http://localhost:8501` 접속
+
+---
+
+## 💡 사용 방법
+
+### 방법 1: 텍스트 입력 (가장 빠름)
+
+1. **"✏️ Text Input"** 선택
+2. 코드 영역에 Python 코드 입력
+3. **"🤖 Generate Tests"** 클릭
+4. 생성된 테스트 확인
+5. **"▶️ Run Tests"** 클릭으로 즉시 실행
+
+### 방법 2: 파일 업로드
+
+1. **"📄 Upload Single File"** 선택
+2. `.py` 파일 업로드 (최대 500KB)
+3. **"🤖 Generate Tests"** 클릭
+
+### 방법 3: ZIP 프로젝트
+
+1. **"📦 Upload Project (ZIP)"** 선택
+2. 프로젝트를 ZIP으로 압축하여 업로드
+3. 테스트할 파일 선택
+4. **"🤖 Generate Tests"** 클릭
+
+---
+
+## 🎯 주요 기능 상세
+
+### 1. AI 테스트 생성
+
+- **모델:** Deepseek Coder 1.3b (로컬 실행)
+- **스타일:** 순수 pytest (Playwright 아님)
+- **커버리지:** 함수별 2-3개 테스트 케이스 자동 생성
+
+**생성 예시:**
+```python
+# 입력 코드
+def add(a, b):
+    return a + b
+
+# 생성된 테스트
+import pytest
+
+def test_add_returns_sum():
+    assert add(2, 3) == 5
+    assert add(0, 0) == 0
+    assert add(-1, 1) == 0
+```
+
+### 2. 후처리 필터
+
+TestGenius는 AI 출력을 자동으로 정리합니다:
+
+- ✅ 설명 주석 제거 (50자 이상)
+- ✅ 환각된 import 제거
+- ✅ 들여쓰기 정규화
+- ✅ 빈 테스트 거부 (`pass`, `...`)
+- ✅ 구문 검증 (AST)
+
+### 3. 테스트 실행
+
+- pytest로 즉시 실행
+- 성공/실패/건너뛴 테스트 카운트
+- 개별 테스트 결과 및 실행 시간
+- 실패 시 에러 메시지 표시
+
+### 4. 복잡한 파일 처리
+
+- 500줄 이상 파일 자동 단순화
+- 클래스 구조 + 메서드 시그니처 추출
+- 주요 컴포넌트에 집중한 테스트 생성
+
+---
+
+## ⚙️ 설정
+
+### Temperature 조절
+
+- **0.0-0.3**: 일관성 있는 테스트 (추천)
+- **0.4-0.7**: 균형잡힌 테스트
+- **0.8-1.0**: 창의적인 테스트 (실험적)
+
+### 타임아웃
+
+- AI 생성: 120초
+- pytest 실행: 60초
+
+---
+
+## 🛠️ 트러블슈팅
+
+### Ollama 연결 실패
+
+```bash
+# Ollama 서버 시작
+ollama serve
+
+# 연결 확인
+curl http://localhost:11434/api/tags
+```
+
+### 모델 없음
+
+```bash
+ollama pull deepseek-coder:1.3b
+```
+
+### Streamlit 재시작
+
+```bash
+pkill -f "streamlit run"
+streamlit run app.py
+```
+
+---
+
+## 📊 현재 상태 (2025-12-31)
+
+### ✅ 완료된 기능
+
+- [x] Ollama 통신 (Iteration 1)
+- [x] AI 테스트 생성 (Iteration 2)
+- [x] 파일 업로드 (단일 + ZIP) (Iteration 3)
+- [x] pytest 실행 (Iteration 4)
+- [x] 후처리 필터 (설명 제거, 환각 제거)
+- [x] 검증 로직 (빈 테스트 거부)
+- [x] 복잡한 파일 처리
+- [x] 개선 제안
+
+### 🚧 알려진 제한사항
+
+- 복잡한 클래스 테스트 품질 낮음
+- AI가 가끔 잘못된 코드 생성 (검증으로 거부)
+- 대규모 프로젝트 지원 제한적
+
+### 🔮 향후 계획
+
+- [ ] Coverage 측정 복구 (Iteration 6)
+- [ ] 리스크 분류 (Iteration 7)
+- [ ] 더 큰 모델 지원 (7B)
+- [ ] JavaScript/TypeScript 지원
+
+---
+
+## 🧪 테스트
+
+```bash
+# 단위 테스트 실행
+PYTHONPATH=. pytest tests/unit/ -v
+
+# 특정 테스트만
+PYTHONPATH=. pytest tests/unit/test_test_generator.py -v
+```
+
+---
+
+## 📄 라이선스
+
+MIT License - 자유롭게 사용 가능
+
+---
+
+## 🙏 기여
+
+이슈 및 PR 환영합니다!
+
+---
+
+## 📝 문서
+
+- [TRD_2025.md](TRD_2025.md) - 기술 상세 문서
+- [TASK_STATUS.md](TASK_STATUS.md) - 프로젝트 현황
+- [BUGFIX_SESSION_2025-12-31.md](BUGFIX_SESSION_2025-12-31.md) - 버그 수정 기록
